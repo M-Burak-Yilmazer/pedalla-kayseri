@@ -1,0 +1,1 @@
+{ "layout": "layouts/faaliyet.njk", "permalink": "/faaliyetler/{{ page.fileSlug }}/" }

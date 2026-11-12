@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+title: Etkinlikler
+permalink: /etkinlikler/
+ozet: Pedalla Kayseri'nin yaklaşan bisiklet turları, eğitimleri ve buluşmaları.
+---
+{% from "partials/kartlar.njk" import etkinlikKarti %}
+<header class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Takvim</p>
+    <h1>Yaklaşan Etkinlikler</h1>
+    <p class="lead">Turlar, eğitimler ve sosyal buluşmalar. Katılmak için üye olmanız yeterli; detaylar etkinlik sayfasında.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container narrow">
+    <div class="events" data-yaklasan>
+      {% for e in collections.etkinlikler %}{{ etkinlikKarti(e) }}{% endfor %}
+      <p class="empty" hidden>Şu an planlanmış bir etkinlik yok. Yeni duyurular için <a href="https://www.instagram.com/{{ site.sosyal.instagram }}/" target="_blank" rel="noopener">@{{ site.sosyal.instagram }}</a> hesabımızı takip edin.</p>
+    </div>
+    <p class="hint">Geçmiş etkinliklerimizin fotoğraf ve videoları için <a href="/faaliyetler/">Faaliyetler</a> sayfasına göz atın.</p>
+  </div>
+</section>

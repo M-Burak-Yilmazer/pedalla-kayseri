@@ -1,0 +1,164 @@
+# ==========================================================
+# Pedalla Kayseri — Yönetim Paneli (Decap CMS) yapılandırması
+# Panel adresi: https://SITENIZ/admin/
+# ==========================================================
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: "{{collection}} eklendi: {{slug}}"
+    update: "{{collection}} güncellendi: {{slug}}"
+    delete: "{{collection}} silindi: {{slug}}"
+    uploadMedia: "Medya yüklendi: {{path}}"
+    deleteMedia: "Medya silindi: {{path}}"
+
+# Bilgisayarınızda test için: `npm run cms` + `npm start`, ardından http://localhost:8080/admin/
+local_backend: true
+
+locale: "tr"
+site_url: "https://pedallakayseri.netlify.app"
+display_url: "https://pedallakayseri.netlify.app"
+logo_url: "/assets/img/logo-mark.svg"
+
+media_folder: "src/assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  # ---------------------------------------------------------
+  - name: "etkinlikler"
+    label: "Yaklaşan Etkinlikler"
+    label_singular: "Etkinlik"
+    description: "Planlanan turlar, eğitimler ve buluşmalar. Tarihi geçen etkinlikler sitede otomatik gizlenir. Etkinlik bittikten sonra fotoğraflarıyla birlikte 'Geçmiş Faaliyetler'e ekleyebilirsiniz."
+    folder: "src/etkinlikler"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: ["tarih", "title"]
+    summary: "{{title}} — {{tarih | date('DD.MM.YYYY HH:mm')}}"
+    fields:
+      - { label: "Etkinlik Adı", name: "title", widget: "string" }
+      - { label: "Tarih ve Saat", name: "tarih", widget: "datetime", date_format: "DD.MM.YYYY", time_format: "HH:mm" }
+      - { label: "Kısa Özet", name: "ozet", widget: "text", required: false, hint: "Kartlarda ve paylaşım önizlemesinde görünür (1–2 cümle)." }
+      - label: "Etkinlik Türü"
+        name: "tur"
+        widget: "select"
+        required: false
+        options: ["Şehir Turu", "Dağ / Arazi", "Yol Sürüşü", "Uzun Mesafe", "Eğitim", "Yarış", "Sosyal Etkinlik", "Sosyal Sorumluluk"]
+      - label: "Seviye"
+        name: "seviye"
+        widget: "select"
+        required: false
+        options: ["Herkes", "Başlangıç", "Orta", "İleri"]
+      - { label: "Buluşma Noktası", name: "bulusma", widget: "string", required: false }
+      - { label: "Mesafe (km)", name: "mesafe", widget: "number", value_type: "float", required: false }
+      - { label: "Tırmanış (m)", name: "irtifa", widget: "number", value_type: "int", required: false }
+      - { label: "Kontenjan (kişi)", name: "kontenjan", widget: "number", value_type: "int", required: false }
+      - { label: "Kapak Görseli", name: "kapak", widget: "image", required: false }
+      - { label: "Rota Bağlantısı (Strava/Komoot)", name: "rotaLink", widget: "string", required: false }
+      - { label: "Katılım Kayıt Bağlantısı", name: "kayitLink", widget: "string", required: false, hint: "Boş bırakılırsa 'Üye Ol & Katıl' butonu gösterilir. İsterseniz Google Form vb. bir bağlantı ekleyin." }
+      - { label: "Harita Gömme Bağlantısı", name: "haritaEmbed", widget: "string", required: false, hint: "Google Haritalar > Paylaş > Harita yerleştir > src=\"...\" içindeki adres." }
+      - label: "Yanınıza Alın"
+        name: "gerekenler"
+        widget: "list"
+        required: false
+        default: ["Kask", "Su matarası", "Yedek iç lastik", "Ön/arka ışık"]
+      - { label: "Taslak (sitede gösterme)", name: "taslak", widget: "boolean", default: false, required: false }
+      - { label: "Detaylı Açıklama", name: "body", widget: "markdown", required: false }
+
+  # ---------------------------------------------------------
+  - name: "faaliyetler"
+    label: "Geçmiş Faaliyetler"
+    label_singular: "Faaliyet"
+    description: "Tamamlanmış etkinliklerin fotoğraf, video ve yazılarıyla arşivi."
+    folder: "src/faaliyetler"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: ["tarih", "title"]
+    summary: "{{title}} — {{tarih | date('DD.MM.YYYY')}}"
+    fields:
+      - { label: "Faaliyet Adı", name: "title", widget: "string" }
+      - { label: "Tarih", name: "tarih", widget: "datetime", date_format: "DD.MM.YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Kısa Özet", name: "ozet", widget: "text", required: false }
+      - label: "Faaliyet Türü"
+        name: "tur"
+        widget: "select"
+        required: false
+        options: ["Şehir Turu", "Dağ / Arazi", "Yol Sürüşü", "Uzun Mesafe", "Eğitim", "Yarış", "Sosyal Etkinlik", "Sosyal Sorumluluk"]
+      - { label: "Kapak Görseli", name: "kapak", widget: "image", required: false, hint: "Yatay (16:10) ve 1600px genişliğinde önerilir." }
+      - { label: "Konum / Rota", name: "konum", widget: "string", required: false }
+      - { label: "Mesafe (km)", name: "mesafe", widget: "number", value_type: "float", required: false }
+      - { label: "Tırmanış (m)", name: "irtifa", widget: "number", value_type: "int", required: false }
+      - { label: "Katılımcı Sayısı", name: "katilimci", widget: "number", value_type: "int", required: false }
+      - { label: "Rota Bağlantısı (Strava/Komoot)", name: "rotaLink", widget: "string", required: false }
+      - label: "Fotoğraf Galerisi"
+        name: "galeri"
+        widget: "list"
+        required: false
+        summary: "{{fields.aciklama}}"
+        fields:
+          - { label: "Fotoğraf", name: "gorsel", widget: "image" }
+          - { label: "Açıklama", name: "aciklama", widget: "string", required: false }
+      - label: "Videolar"
+        name: "videolar"
+        widget: "list"
+        required: false
+        hint: "En iyisi videoyu YouTube veya Instagram'a yükleyip bağlantısını eklemektir. Kısa videolar (20 MB altı) doğrudan da yüklenebilir."
+        fields:
+          - { label: "YouTube / Instagram Bağlantısı", name: "url", widget: "string", required: false }
+          - { label: "veya Video Dosyası (mp4)", name: "dosya", widget: "file", required: false }
+          - { label: "Video Başlığı", name: "baslik", widget: "string", required: false }
+      - { label: "Taslak (sitede gösterme)", name: "taslak", widget: "boolean", default: false, required: false }
+      - { label: "Yazı / Hikâye", name: "body", widget: "markdown", required: false }
+
+  # ---------------------------------------------------------
+  - name: "ayarlar"
+    label: "Site Ayarları ve Sayfalar"
+    editor: { preview: false }
+    files:
+      - label: "Genel Bilgiler, Misyon & Vizyon, İletişim"
+        name: "site"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Topluluk Adı", name: "ad", widget: "string" }
+          - { label: "Slogan", name: "slogan", widget: "string" }
+          - { label: "Kısa Tanıtım (alt bilgi ve arama motorları)", name: "aciklama", widget: "text" }
+          - { label: "Site Adresi", name: "url", widget: "string" }
+          - { label: "Bağlı Olunan Kurum", name: "bagliKurum", widget: "string" }
+          - { label: "Hakkımızda Metni", name: "hakkimizda", widget: "text", hint: "Paragrafları boş satırla ayırın." }
+          - { label: "Misyonumuz", name: "misyon", widget: "text" }
+          - { label: "Vizyonumuz", name: "vizyon", widget: "text" }
+          - label: "Değerlerimiz"
+            name: "degerler"
+            widget: "list"
+            fields:
+              - { label: "Başlık", name: "baslik", widget: "string" }
+              - { label: "Açıklama", name: "metin", widget: "text" }
+          - label: "Ana Sayfa Rakamları"
+            name: "istatistikler"
+            widget: "list"
+            fields:
+              - { label: "Değer (ör. 150+)", name: "deger", widget: "string" }
+              - { label: "Etiket (ör. Üye)", name: "etiket", widget: "string" }
+          - label: "İletişim Bilgileri"
+            name: "iletisim"
+            widget: "object"
+            fields:
+              - { label: "E-posta", name: "eposta", widget: "string", required: false }
+              - { label: "Telefon", name: "telefon", widget: "string", required: false }
+              - { label: "WhatsApp Numarası (ör. +905321234567)", name: "whatsapp", widget: "string", required: false }
+              - { label: "Adres", name: "adres", widget: "text", required: false }
+              - { label: "Harita Gömme Bağlantısı", name: "haritaEmbed", widget: "string", required: false }
+          - label: "Sosyal Medya"
+            name: "sosyal"
+            widget: "object"
+            fields:
+              - { label: "Instagram Kullanıcı Adı (@ olmadan)", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube Kanal Adresi", name: "youtube", widget: "string", required: false }
+              - { label: "Strava Kulüp Adresi", name: "strava", widget: "string", required: false }
+      - label: "KVKK Aydınlatma Metni"
+        name: "kvkk"
+        file: "src/kvkk.md"
+        fields:
+          - { label: "Şablon", name: "layout", widget: "hidden", default: "layouts/sayfa.njk" }
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Adres", name: "permalink", widget: "hidden", default: "/kvkk/" }
+          - { label: "Metin", name: "body", widget: "markdown" }

@@ -1,0 +1,33 @@
+{
+  "ad": "Pedalla Kayseri",
+  "slogan": "Erciyes'in eteklerinde, birlikte pedal çeviriyoruz.",
+  "aciklama": "Pedalla Kayseri; Kayseri Valiliği ERVA Spor Okulları bünyesinde faaliyet gösteren, her yaştan ve her seviyeden bisiklet severi bir araya getiren bir bisiklet topluluğudur.",
+  "url": "https://pedallakayseri.netlify.app",
+  "bagliKurum": "Kayseri Valiliği ERVA Spor Okulları",
+  "hakkimizda": "Pedalla Kayseri, bisikleti bir ulaşım aracından öte; sağlıklı yaşamın, doğayla buluşmanın ve dostluğun aracı olarak gören gönüllülerden oluşur. Şehir içi turlardan Erciyes yamaçlarındaki parkurlara, Sultan Sazlığı'ndan Kapadokya rotalarına kadar düzenli sürüşler, eğitimler ve sosyal sorumluluk etkinlikleri düzenliyoruz. Kayseri Valiliği ERVA Spor Okulları çatısı altında; gençlerin ve ailelerin spora katılımını artırmayı, güvenli sürüş kültürünü yaygınlaştırmayı hedefliyoruz.",
+  "misyon": "Kayseri'de her yaştan insanı güvenli, keyifli ve düzenli bisiklet sürüşleriyle buluşturmak; bisikleti sağlıklı yaşamın ve çevre bilincinin bir parçası hâline getirmek; gençleri spor, disiplin ve takım ruhuyla tanıştırmak.",
+  "vizyon": "Kayseri'yi bisiklet dostu bir şehir hâline getirme yolunda öncü bir topluluk olmak; ERVA Spor Okulları ile birlikte yetiştirdiği sporcular, düzenlediği etkinlikler ve oluşturduğu bisiklet kültürüyle Türkiye'ye örnek gösterilmek.",
+  "degerler": [
+    { "baslik": "Güvenlik", "metin": "Kask, ışık ve trafik kurallarına uyum her sürüşün ön şartıdır." },
+    { "baslik": "Kapsayıcılık", "metin": "Yeni başlayandan deneyimli sürücüye herkese yer var; kimse geride kalmaz." },
+    { "baslik": "Doğaya Saygı", "metin": "Parkurlarda iz bırakmaz, çevremizi koruruz." },
+    { "baslik": "Dayanışma", "metin": "Birlikte yola çıkar, birlikte varırız." }
+  ],
+  "istatistikler": [
+    { "deger": "150+", "etiket": "Üye" },
+    { "deger": "40+", "etiket": "Düzenlenen Tur" },
+    { "deger": "5.000+", "etiket": "Toplam Km" }
+  ],
+  "iletisim": {
+    "eposta": "info@pedallakayseri.com",
+    "telefon": "+90 5XX XXX XX XX",
+    "whatsapp": "",
+    "adres": "Kayseri Valiliği ERVA Spor Okulları, Kocasinan / Kayseri",
+    "haritaEmbed": "https://www.google.com/maps?q=Kayseri+Valili%C4%9Fi&output=embed"
+  },
+  "sosyal": {
+    "instagram": "pedallakayseri",
+    "youtube": "",
+    "strava": ""
+  }
+}

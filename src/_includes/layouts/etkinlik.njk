@@ -1,0 +1,58 @@
+---
+layout: layouts/base.njk
+---
+<article>
+  <header class="page-hero{% if kapak %} page-hero--img{% endif %}"{% if kapak %} style="--kapak:url('{{ kapak }}')"{% endif %}>
+    <div class="container">
+      <a href="/etkinlikler/" class="back">← Tüm etkinlikler</a>
+      <p class="eyebrow">{{ tarih | gunAdi }}, {{ tarih | tarihUzun }} · {{ tarih | saat }}</p>
+      <h1>{{ title }}</h1>
+      {% if ozet %}<p class="lead">{{ ozet }}</p>{% endif %}
+      <p class="past-note" data-gecmis-uyari="{{ tarih | isoTarih }}" hidden>Bu etkinlik tamamlandı.</p>
+    </div>
+  </header>
+
+  <div class="container detail">
+    <div class="detail__main prose">
+      {{ content | safe }}
+
+      {% if gerekenler and gerekenler.length %}
+      <h2>Yanınıza alın</h2>
+      <ul class="checklist">
+        {% for g in gerekenler %}<li>{{ g }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if haritaEmbed %}
+      <h2>Buluşma Noktası</h2>
+      <div class="map"><iframe src="{{ haritaEmbed }}" loading="lazy" title="Buluşma noktası haritası"></iframe></div>
+      {% endif %}
+    </div>
+
+    <aside class="detail__side">
+      <div class="infobox">
+        <h3>Etkinlik Bilgileri</h3>
+        <dl>
+          <dt>Tarih</dt><dd>{{ tarih | tarihUzun }}</dd>
+          <dt>Saat</dt><dd>{{ tarih | saat }}</dd>
+          {% if bulusma %}<dt>Buluşma</dt><dd>{{ bulusma }}</dd>{% endif %}
+          {% if tur %}<dt>Tür</dt><dd>{{ tur }}</dd>{% endif %}
+          {% if seviye %}<dt>Seviye</dt><dd>{{ seviye }}</dd>{% endif %}
+          {% if mesafe %}<dt>Mesafe</dt><dd>{{ mesafe }} km</dd>{% endif %}
+          {% if irtifa %}<dt>Tırmanış</dt><dd>{{ irtifa }} m</dd>{% endif %}
+          {% if kontenjan %}<dt>Kontenjan</dt><dd>{{ kontenjan }} kişi</dd>{% endif %}
+        </dl>
+        {% if rotaLink %}<a href="{{ rotaLink }}" class="btn btn--ghost-dark btn--block" target="_blank" rel="noopener">Rotayı Gör</a>{% endif %}
+        {% if kayitLink %}
+          <a href="{{ kayitLink }}" class="btn btn--primary btn--block" target="_blank" rel="noopener">Katılım Kaydı</a>
+        {% else %}
+          <a href="/uyelik/" class="btn btn--primary btn--block">Üye Ol & Katıl</a>
+        {% endif %}
+      </div>
+      <div class="infobox infobox--note">
+        <h3>Güvenlik</h3>
+        <p>Kask takmak zorunludur. Bisikletinizin fren ve lastiklerini sürüş öncesi kontrol edin; 18 yaş altı katılımcılar veli onayı ile katılabilir.</p>
+      </div>
+    </aside>
+  </div>
+</article>

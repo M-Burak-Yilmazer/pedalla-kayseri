@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+title: Hakkımızda
+permalink: /hakkimizda/
+---
+<header class="page-hero">
+  <div class="container">
+    <p class="eyebrow">{{ site.bagliKurum }} bünyesinde</p>
+    <h1>Hakkımızda</h1>
+    <p class="lead">{{ site.slogan }}</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container about">
+    <div class="prose">
+      <h2>Pedalla Kayseri kimdir?</h2>
+      {% for p in site.hakkimizda.split("\n") %}{% if p | trim %}<p>{{ p }}</p>{% endif %}{% endfor %}
+    </div>
+    <aside class="about__box">
+      <h3>Bağlı olduğumuz kurum</h3>
+      <p><b>{{ site.bagliKurum }}</b></p>
+      <p>ERVA Spor Okulları, Kayseri Valiliği koordinasyonunda gençleri ve çocukları sporla buluşturan bir projedir. Pedalla Kayseri, bu çatı altında bisiklet branşında faaliyet gösterir.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container mv mv--full">
+    <article class="mv__card">
+      <span class="mv__icon" aria-hidden="true">◎</span>
+      <h2>Misyonumuz</h2>
+      <p>{{ site.misyon }}</p>
+    </article>
+    <article class="mv__card mv__card--dark">
+      <span class="mv__icon" aria-hidden="true">▲</span>
+      <h2>Vizyonumuz</h2>
+      <p>{{ site.vizyon }}</p>
+    </article>
+  </div>
+</section>
+
+{% if site.degerler and site.degerler.length %}
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Neye inanıyoruz?</p>
+    <h2>Değerlerimiz</h2>
+    <div class="values">
+      {% for d in site.degerler %}
+      <div class="value"><span>{{ loop.index }}</span><h3>{{ d.baslik }}</h3><p>{{ d.metin }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section cta">
+  <div class="container cta__inner">
+    <h2>Aramıza katılmak ister misin?</h2>
+    <p>Her yaştan ve her seviyeden bisiklet severi bekliyoruz.</p>
+    <div class="hero__cta"><a href="/uyelik/" class="btn btn--primary">Üyelik Başvurusu</a></div>
+  </div>
+</section>

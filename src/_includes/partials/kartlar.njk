@@ -1,0 +1,41 @@
+{# Etkinlik kartı — geçmiş tarihliler main.js tarafından otomatik gizlenir #}
+{% macro etkinlikKarti(e) %}
+<article class="event" data-tarih="{{ e.data.tarih | isoTarih }}">
+  <div class="event__date">
+    <span class="event__day">{{ e.data.tarih | tarihGun }}</span>
+    <span class="event__month">{{ e.data.tarih | tarihAy }}</span>
+  </div>
+  <div class="event__body">
+    <div class="tags">
+      {% if e.data.tur %}<span class="tag">{{ e.data.tur }}</span>{% endif %}
+      {% if e.data.seviye %}<span class="tag tag--level">{{ e.data.seviye }}</span>{% endif %}
+    </div>
+    <h3><a href="{{ e.url }}">{{ e.data.title }}</a></h3>
+    <ul class="meta">
+      <li>🕗 {{ e.data.tarih | gunAdi }}, {{ e.data.tarih | saat }}</li>
+      {% if e.data.bulusma %}<li>📍 {{ e.data.bulusma }}</li>{% endif %}
+      {% if e.data.mesafe %}<li>🚴 {{ e.data.mesafe }} km{% if e.data.irtifa %} · ↗ {{ e.data.irtifa }} m{% endif %}</li>{% endif %}
+    </ul>
+  </div>
+  <a href="{{ e.url }}" class="event__go" aria-label="{{ e.data.title }} detayları">→</a>
+</article>
+{% endmacro %}
+
+{% macro faaliyetKarti(f) %}
+<article class="card">
+  <a href="{{ f.url }}" class="card__img">
+    {% if f.data.kapak %}<img src="{{ f.data.kapak }}" alt="{{ f.data.title }}" loading="lazy">{% endif %}
+    {% if f.data.videolar and f.data.videolar.length %}<span class="card__badge">▶ Video</span>{% endif %}
+  </a>
+  <div class="card__body">
+    <time datetime="{{ f.data.tarih | isoTarih }}">{{ f.data.tarih | tarihUzun }}</time>
+    <h3><a href="{{ f.url }}">{{ f.data.title }}</a></h3>
+    {% if f.data.ozet %}<p>{{ f.data.ozet }}</p>{% endif %}
+    <ul class="meta meta--inline">
+      {% if f.data.mesafe %}<li>{{ f.data.mesafe }} km</li>{% endif %}
+      {% if f.data.katilimci %}<li>{{ f.data.katilimci }} katılımcı</li>{% endif %}
+      {% if f.data.galeri and f.data.galeri.length %}<li>{{ f.data.galeri.length }} fotoğraf</li>{% endif %}
+    </ul>
+  </div>
+</article>
+{% endmacro %}

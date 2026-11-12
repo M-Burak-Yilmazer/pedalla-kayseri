@@ -1,0 +1,66 @@
+---
+layout: layouts/base.njk
+---
+<article>
+  <header class="page-hero{% if kapak %} page-hero--img{% endif %}"{% if kapak %} style="--kapak:url('{{ kapak }}')"{% endif %}>
+    <div class="container">
+      <a href="/faaliyetler/" class="back">← Tüm faaliyetler</a>
+      <p class="eyebrow">{{ tarih | tarihUzun }}{% if tur %} · {{ tur }}{% endif %}</p>
+      <h1>{{ title }}</h1>
+      {% if ozet %}<p class="lead">{{ ozet }}</p>{% endif %}
+    </div>
+  </header>
+
+  <div class="container detail">
+    <div class="detail__main prose">
+      {{ content | safe }}
+
+      {% if galeri and galeri.length %}
+      <h2>Fotoğraflar</h2>
+      <div class="gallery" data-gallery>
+        {% for g in galeri %}
+        <a href="{{ g.gorsel }}" class="gallery__item" data-caption="{{ g.aciklama }}">
+          <img src="{{ g.gorsel }}" alt="{{ g.aciklama or title }}" loading="lazy">
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if videolar and videolar.length %}
+      <h2>Videolar</h2>
+      <div class="videos">
+        {% for v in videolar %}
+          {% set em = v.url | videoEmbed %}
+          {% if v.dosya %}
+            <video controls preload="metadata" src="{{ v.dosya }}"></video>
+          {% elif em and em.tur == "dosya" %}
+            <video controls preload="metadata" src="{{ em.src }}"></video>
+          {% elif em %}
+            <div class="video video--{{ em.tur }}"><iframe src="{{ em.src }}" title="{{ v.baslik or title }}" loading="lazy" allowfullscreen allow="encrypted-media; picture-in-picture"></iframe></div>
+          {% endif %}
+          {% if v.baslik %}<p class="video__caption">{{ v.baslik }}</p>{% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <aside class="detail__side">
+      <div class="infobox">
+        <h3>Faaliyet Bilgileri</h3>
+        <dl>
+          <dt>Tarih</dt><dd>{{ tarih | tarihUzun }}</dd>
+          {% if konum %}<dt>Konum / Rota</dt><dd>{{ konum }}</dd>{% endif %}
+          {% if mesafe %}<dt>Mesafe</dt><dd>{{ mesafe }} km</dd>{% endif %}
+          {% if irtifa %}<dt>Tırmanış</dt><dd>{{ irtifa }} m</dd>{% endif %}
+          {% if katilimci %}<dt>Katılımcı</dt><dd>{{ katilimci }} kişi</dd>{% endif %}
+        </dl>
+        {% if rotaLink %}<a href="{{ rotaLink }}" class="btn btn--ghost-dark btn--block" target="_blank" rel="noopener">Rotayı Gör</a>{% endif %}
+      </div>
+      <div class="infobox infobox--accent">
+        <h3>Bir sonrakine sen de katıl</h3>
+        <p>Yaklaşan sürüşlerimizi takip et, topluluğa katıl.</p>
+        <a href="/etkinlikler/" class="btn btn--primary btn--block">Yaklaşan Etkinlikler</a>
+      </div>
+    </aside>
+  </div>
+</article>

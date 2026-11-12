@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}{{ site.ad }}</title>
+  <meta name="description" content="{{ ozet or site.aciklama }}">
+  <meta property="og:title" content="{{ title or site.ad }}">
+  <meta property="og:description" content="{{ ozet or site.aciklama }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  {% if kapak %}<meta property="og:image" content="{{ site.url }}{{ kapak }}">{% endif %}
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
+</head>
+<body class="{{ bodyClass }}">
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+  {% include "partials/header.njk" %}
+  <main id="icerik">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" aria-label="Kapat">&times;</button>
+    <button class="lightbox__nav lightbox__prev" aria-label="Önceki">&#8249;</button>
+    <figure><img alt=""><figcaption></figcaption></figure>
+    <button class="lightbox__nav lightbox__next" aria-label="Sonraki">&#8250;</button>
+  </div>
+  <script src="/assets/js/main.js" defer></script>
+  <script>
+    // Yönetici davet / şifre sıfırlama bağlantıları ana sayfaya düşerse panele yönlendir
+    if (window.location.hash.match(/(invite_token|recovery_token|confirmation_token)=/)) {
+      window.addEventListener("load", function () {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

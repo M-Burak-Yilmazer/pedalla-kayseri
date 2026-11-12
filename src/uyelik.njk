@@ -1,0 +1,126 @@
+---
+layout: layouts/base.njk
+title: Üyelik Başvurusu
+permalink: /uyelik/
+ozet: Pedalla Kayseri bisiklet topluluğuna üyelik başvurusu formu.
+---
+<header class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Aramıza Katıl</p>
+    <h1>Üyelik Başvurusu</h1>
+    <p class="lead">Formu doldurun; başvurunuz incelendikten sonra sizinle iletişime geçip topluluk grubumuza ekleyelim.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container form-wrap">
+    <form name="uyelik" method="POST" action="/tesekkurler/" data-netlify="true" netlify-honeypot="bot-alani" class="form" data-validate>
+      <input type="hidden" name="form-name" value="uyelik">
+      <p hidden><label>Bunu doldurmayın: <input name="bot-alani"></label></p>
+
+      <fieldset>
+        <legend>Kişisel Bilgiler</legend>
+        <div class="grid-2">
+          <label>Ad Soyad *<input type="text" name="ad_soyad" required autocomplete="name"></label>
+          <label>Doğum Tarihi *<input type="date" name="dogum_tarihi" required data-yas></label>
+          <label>Cinsiyet
+            <select name="cinsiyet"><option value="">Belirtmek istemiyorum</option><option>Kadın</option><option>Erkek</option></select>
+          </label>
+          <label>Meslek / Okul<input type="text" name="meslek"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>İletişim</legend>
+        <div class="grid-2">
+          <label>Cep Telefonu *<input type="tel" name="telefon" required placeholder="05XX XXX XX XX" pattern="^(\+90|0)?\s?5\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$" autocomplete="tel"></label>
+          <label>E-posta *<input type="email" name="eposta" required autocomplete="email"></label>
+          <label>İlçe *
+            <select name="ilce" required>
+              <option value="">Seçiniz</option>
+              <option>Melikgazi</option><option>Kocasinan</option><option>Talas</option><option>Hacılar</option><option>İncesu</option><option>Develi</option><option>Yahyalı</option><option>Bünyan</option><option>Pınarbaşı</option><option>Tomarza</option><option>Yeşilhisar</option><option>Sarıoğlan</option><option>Sarız</option><option>Akkışla</option><option>Felahiye</option><option>Özvatan</option><option>Diğer</option>
+            </select>
+          </label>
+          <label>Instagram Kullanıcı Adı<input type="text" name="instagram" placeholder="@kullaniciadi"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Bisiklet ve Deneyim</legend>
+        <div class="grid-2">
+          <label>Bisikletiniz var mı? *
+            <select name="bisiklet_var_mi" required><option value="">Seçiniz</option><option>Evet</option><option>Hayır</option><option>Almayı düşünüyorum</option></select>
+          </label>
+          <label>Bisiklet Türü
+            <select name="bisiklet_turu"><option value="">Seçiniz</option><option>Dağ (MTB)</option><option>Yol</option><option>Gravel</option><option>Şehir / Hibrit</option><option>Elektrikli</option><option>Diğer</option></select>
+          </label>
+        </div>
+        <div class="radio-group" role="radiogroup" aria-label="Deneyim seviyesi">
+          <span class="label">Deneyim Seviyesi *</span>
+          <label class="radio"><input type="radio" name="seviye" value="Yeni başlayan" required> <span><b>Yeni başlayan</b><small>0–20 km rahat sürüş</small></span></label>
+          <label class="radio"><input type="radio" name="seviye" value="Orta"> <span><b>Orta</b><small>20–60 km, tırmanış deneyimi var</small></span></label>
+          <label class="radio"><input type="radio" name="seviye" value="İleri"> <span><b>İleri</b><small>60 km+, düzenli antrenman</small></span></label>
+        </div>
+        <div class="check-group">
+          <span class="label">İlgi Alanları</span>
+          <label class="check"><input type="checkbox" name="ilgi" value="Şehir turları"> Şehir turları</label>
+          <label class="check"><input type="checkbox" name="ilgi" value="Dağ / arazi"> Dağ / arazi</label>
+          <label class="check"><input type="checkbox" name="ilgi" value="Uzun mesafe"> Uzun mesafe</label>
+          <label class="check"><input type="checkbox" name="ilgi" value="Yarış / antrenman"> Yarış / antrenman</label>
+          <label class="check"><input type="checkbox" name="ilgi" value="Eğitim / güvenli sürüş"> Eğitim / güvenli sürüş</label>
+          <label class="check"><input type="checkbox" name="ilgi" value="Gönüllülük / organizasyon"> Gönüllülük / organizasyon</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Acil Durum</legend>
+        <div class="grid-2">
+          <label>Acil Durumda Aranacak Kişi *<input type="text" name="acil_kisi" required></label>
+          <label>Acil Durum Telefonu *<input type="tel" name="acil_telefon" required></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="veli" data-veli hidden>
+        <legend>Veli Bilgileri (18 yaş altı)</legend>
+        <div class="grid-2">
+          <label>Veli Ad Soyad *<input type="text" name="veli_ad_soyad" data-veli-alan></label>
+          <label>Veli Telefonu *<input type="tel" name="veli_telefon" data-veli-alan></label>
+        </div>
+        <label class="check"><input type="checkbox" name="veli_onayi" value="Evet" data-veli-alan> Velisi olarak çocuğumun Pedalla Kayseri etkinliklerine katılmasına onay veriyorum. *</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ek Bilgi</legend>
+        <label>Bizi nereden duydunuz?
+          <select name="kaynak"><option value="">Seçiniz</option><option>Instagram</option><option>Arkadaş tavsiyesi</option><option>ERVA Spor Okulları</option><option>Etkinlikte gördüm</option><option>Diğer</option></select>
+        </label>
+        <label>Eklemek istedikleriniz<textarea name="not" rows="3"></textarea></label>
+      </fieldset>
+
+      <div class="consents">
+        <label class="check"><input type="checkbox" name="kvkk_onay" value="Okudum, onaylıyorum" required> <span><a href="/kvkk/" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum; kişisel verilerimin üyelik ve iletişim amacıyla işlenmesini kabul ediyorum. *</span></label>
+        <label class="check"><input type="checkbox" name="kurallar_onay" value="Kabul" required> <span>Etkinliklerde kask takacağımı, trafik kurallarına ve rehber sürücünün talimatlarına uyacağımı; sürüşlere kendi sorumluluğumda katıldığımı kabul ediyorum. *</span></label>
+        <label class="check"><input type="checkbox" name="foto_izin" value="Evet"> <span>Etkinliklerde çekilen fotoğraf/videolarda yer almamın sitede ve sosyal medyada paylaşılmasına izin veriyorum.</span></label>
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--lg">Başvuruyu Gönder</button>
+      <p class="form__note">* işaretli alanlar zorunludur.</p>
+    </form>
+
+    <aside class="form-side">
+      <div class="infobox infobox--accent">
+        <h3>Üyelik sonrası</h3>
+        <ol class="steps">
+          <li>Başvurunuz yönetim ekibimize ulaşır.</li>
+          <li>Sizi telefonla ya da e-posta ile ararız.</li>
+          <li>Topluluk duyuru grubumuza eklenirsiniz.</li>
+          <li>İlk sürüşte tanışırız!</li>
+        </ol>
+      </div>
+      <div class="infobox">
+        <h3>Sorunuz mu var?</h3>
+        <p><a href="/iletisim/">İletişim formundan</a> ya da Instagram'dan <a href="https://www.instagram.com/{{ site.sosyal.instagram }}/" target="_blank" rel="noopener">@{{ site.sosyal.instagram }}</a> bize yazabilirsiniz.</p>
+      </div>
+    </aside>
+  </div>
+</section>

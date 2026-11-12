@@ -1,0 +1,106 @@
+---
+layout: layouts/base.njk
+bodyClass: home
+---
+{% from "partials/kartlar.njk" import etkinlikKarti, faaliyetKarti %}
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+      <path class="m1" d="M0 400 L0 300 L260 220 L420 260 L640 110 L760 60 L880 120 L1050 210 L1240 170 L1440 240 L1440 400Z"/>
+      <path class="snow" d="M700 85 L760 60 L820 92 L790 100 L760 86 L735 104Z"/>
+      <path class="m2" d="M0 400 L0 340 L300 290 L520 330 L800 260 L1100 320 L1440 280 L1440 400Z"/>
+      <path class="road" d="M0 400 Q 600 330 1440 370 L1440 400Z"/>
+    </svg>
+  </div>
+  <div class="container hero__inner">
+    <p class="eyebrow">{{ site.bagliKurum }} bünyesinde</p>
+    <h1>Birlikte <span>pedal</span> çeviriyoruz.</h1>
+    <p class="lead">{{ site.slogan }} Şehir turlarından dağ parkurlarına, her seviyeden bisiklet severi bekliyoruz.</p>
+    <div class="hero__cta">
+      <a href="/uyelik/" class="btn btn--primary">Topluluğa Katıl</a>
+      <a href="/etkinlikler/" class="btn btn--ghost">Yaklaşan Etkinlikler</a>
+    </div>
+    <ul class="stats">
+      {% for s in site.istatistikler %}
+      <li><b>{{ s.deger }}</b><span>{{ s.etiket }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Takvim</p>
+        <h2>Yaklaşan Etkinlikler</h2>
+      </div>
+      <a href="/etkinlikler/" class="link-more">Tümünü gör →</a>
+    </div>
+    <div class="events" data-yaklasan data-limit="3">
+      {% for e in collections.etkinlikler %}{{ etkinlikKarti(e) }}{% endfor %}
+      <p class="empty" hidden>Şu an planlanmış bir etkinlik yok. Duyurular için <a href="https://www.instagram.com/{{ site.sosyal.instagram }}/" target="_blank" rel="noopener">Instagram</a> hesabımızı takip edin.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container mv">
+    <div class="mv__intro">
+      <p class="eyebrow">Biz Kimiz?</p>
+      <h2>Bisikletle büyüyen bir topluluk</h2>
+      <p>{{ site.hakkimizda | truncate(320) }}</p>
+      <a href="/hakkimizda/" class="link-more">Hakkımızda daha fazlası →</a>
+    </div>
+    <div class="mv__cards">
+      <article class="mv__card">
+        <span class="mv__icon" aria-hidden="true">◎</span>
+        <h3>Misyonumuz</h3>
+        <p>{{ site.misyon }}</p>
+      </article>
+      <article class="mv__card mv__card--dark">
+        <span class="mv__icon" aria-hidden="true">▲</span>
+        <h3>Vizyonumuz</h3>
+        <p>{{ site.vizyon }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Arşiv</p>
+        <h2>Son Faaliyetlerimiz</h2>
+      </div>
+      <a href="/faaliyetler/" class="link-more">Tüm faaliyetler →</a>
+    </div>
+    <div class="cards">
+      {% for f in collections.faaliyetler | limit(3) %}{{ faaliyetKarti(f) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--insta">
+  <div class="container insta">
+    <div>
+      <p class="eyebrow">Sosyal Medya</p>
+      <h2>Bizi Instagram'da takip edin</h2>
+      <p>Sürüşlerden anlık kareler, rota duyuruları ve topluluk haberleri için <b>@{{ site.sosyal.instagram }}</b> hesabımızı takip edin.</p>
+    </div>
+    <a class="btn btn--insta" href="https://www.instagram.com/{{ site.sosyal.instagram }}/" target="_blank" rel="noopener">@{{ site.sosyal.instagram }} →</a>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="container cta__inner">
+    <h2>Bir sonraki sürüşte seni de görelim.</h2>
+    <p>Başvurunu gönder; seni topluluk grubumuza ve etkinlik duyurularına dahil edelim.</p>
+    <div class="hero__cta">
+      <a href="/uyelik/" class="btn btn--primary">Üyelik Başvurusu</a>
+      <a href="/iletisim/" class="btn btn--ghost-dark">Bize Ulaşın</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+title: İletişim
+permalink: /iletisim/
+ozet: Pedalla Kayseri ile iletişime geçin.
+---
+<header class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Bize Ulaşın</p>
+    <h1>İletişim</h1>
+    <p class="lead">Soru, öneri, iş birliği ya da sponsorluk talepleriniz için bize yazın.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container contact">
+    <div class="contact__info">
+      <ul class="contact__list">
+        {% if site.iletisim.eposta %}<li><span>E-posta</span><a href="mailto:{{ site.iletisim.eposta }}">{{ site.iletisim.eposta }}</a></li>{% endif %}
+        {% if site.iletisim.telefon %}<li><span>Telefon</span><a href="tel:{{ site.iletisim.telefon | replace(' ', '') }}">{{ site.iletisim.telefon }}</a></li>{% endif %}
+        {% if site.iletisim.whatsapp %}<li><span>WhatsApp</span><a href="https://wa.me/{{ site.iletisim.whatsapp | replace(' ', '') | replace('+', '') }}" target="_blank" rel="noopener">Mesaj gönder</a></li>{% endif %}
+        {% if site.sosyal.instagram %}<li><span>Instagram</span><a href="https://www.instagram.com/{{ site.sosyal.instagram }}/" target="_blank" rel="noopener">@{{ site.sosyal.instagram }}</a></li>{% endif %}
+        {% if site.iletisim.adres %}<li><span>Adres</span>{{ site.iletisim.adres }}</li>{% endif %}
+      </ul>
+      {% if site.iletisim.haritaEmbed %}
+      <div class="map"><iframe src="{{ site.iletisim.haritaEmbed }}" loading="lazy" title="Konum haritası"></iframe></div>
+      {% endif %}
+    </div>
+
+    <form name="iletisim" method="POST" action="/tesekkurler/" data-netlify="true" netlify-honeypot="bot-alani" class="form form--card">
+      <input type="hidden" name="form-name" value="iletisim">
+      <p hidden><label>Bunu doldurmayın: <input name="bot-alani"></label></p>
+      <h2>Mesaj Gönderin</h2>
+      <label>Ad Soyad *<input type="text" name="ad_soyad" required autocomplete="name"></label>
+      <div class="grid-2">
+        <label>E-posta *<input type="email" name="eposta" required autocomplete="email"></label>
+        <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
+      </div>
+      <label>Konu *
+        <select name="konu" required>
+          <option value="">Seçiniz</option>
+          <option>Genel soru</option>
+          <option>Etkinlikler hakkında</option>
+          <option>Üyelik</option>
+          <option>İş birliği / Sponsorluk</option>
+          <option>Basın</option>
+          <option>Diğer</option>
+        </select>
+      </label>
+      <label>Mesajınız *<textarea name="mesaj" rows="6" required></textarea></label>
+      <label class="check"><input type="checkbox" name="kvkk_onay" value="Onaylıyorum" required> <span><a href="/kvkk/" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum. *</span></label>
+      <button type="submit" class="btn btn--primary btn--block">Gönder</button>
+    </form>
+  </div>
+</section>

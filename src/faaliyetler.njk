@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: Faaliyetler
+permalink: /faaliyetler/
+ozet: Pedalla Kayseri'nin geçmiş turları, etkinlikleri ve fotoğraf/video arşivi.
+---
+{% from "partials/kartlar.njk" import faaliyetKarti %}
+<header class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Arşiv</p>
+    <h1>Geçmiş Faaliyetlerimiz</h1>
+    <p class="lead">Birlikte çevirdiğimiz pedallar, aştığımız tepeler ve biriktirdiğimiz anılar.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    {% set yillar = collections.faaliyetler | yillar %}
+    {% if yillar.length > 1 %}
+    <div class="filters" role="tablist" aria-label="Yıla göre filtrele">
+      <button class="chip is-active" data-filter="hepsi">Tümü</button>
+      {% for y in yillar %}<button class="chip" data-filter="{{ y }}">{{ y }}</button>{% endfor %}
+    </div>
+    {% endif %}
+    <div class="cards" data-filter-list>
+      {% for f in collections.faaliyetler %}
+        <div data-yil="{{ f.data.tarih | yilOf }}">{{ faaliyetKarti(f) }}</div>
+      {% else %}
+        <p class="empty">Henüz faaliyet eklenmedi.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
